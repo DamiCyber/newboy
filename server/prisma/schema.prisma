@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -42,5 +42,5 @@ model Booking {
   @@index([houseId])
 }
 
-// BookingStatus enum is represented as String due to SQLite enum limitations.
+
 
