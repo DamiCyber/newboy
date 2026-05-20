@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "title": "Willemsparkweg 154",
+    "city": "Amsterdam South",
+    "price": "₦1,250,000",
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "sqft": 3100,
+    "type": "Sale",
+    "badge": "For Sale",
+    "image": "https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1600585154154-1e8a1cc28b3e?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80"
+    ],
+    "videos": [
+      "https://www.w3schools.com/html/mov_bbb.mp4"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "bungalow",
+    "city": "ibadan",
+    "price": "₦3,750 / month",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "sqft": 1450,
+    "type": "Rent",
+    "badge": "Expat Rental",
+    "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1560184897-ae75f418493e?auto=format&fit=crop&w=1600&q=80"
+    ],
+    "videos": [
+      "https://www.w3schools.com/html/movie.mp4"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Valeriusstraat 208",
+    "city": "Amsterdam South",
+    "price": "₦925,000",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "sqft": 1780,
+    "type": "Sale",
+    "badge": "New",
+    "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1502005230044-6b2a3c5b9a07?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1600&q=80"
+    ],
+    "videos": [
+      "https://www.w3schools.com/html/movie.mp4"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Prinsengracht 128",
+    "city": "Amsterdam Center",
+    "price": "₦4,900 / month",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "sqft": 2200,
+    "type": "Rent",
+    "badge": "Rented",
+    "image": "https://images.unsplash.com/photo-1600566753151-384129cf4e3e?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600566753151-384129cf4e3e?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1496412705862-e0088f16f791?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1560448075-bb4caa6c8f66?auto=format&fit=crop&w=1600&q=80"
+    ],
+    "videos": [
+      "https://www.w3schools.com/html/mov_bbb.mp4"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Keizersgracht 401",
+    "city": "Amsterdam Canal District",
+    "price": "₦2,100,000",
+    "bedrooms": 5,
+    "bathrooms": 4,
+    "sqft": 3500,
+    "type": "Sale",
+    "badge": "Historic",
+    "image": "https://images.unsplash.com/photo-1502005230044-6b2a3c5b9a07?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1502005230044-6b2a3c5b9a07?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1505691723518-36a5ac3b2d95?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80"
+    ],
+    "videos": [
+      "https://www.w3schools.com/html/mov_bbb.mp4"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Van Baerlestraat 92",
+    "city": "Amsterdam Museum Quarter",
+    "price": "₦3,250 / month",
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "sqft": 1200,
+    "type": "Rent",
+    "badge": "Available",
+    "image": "https://images.unsplash.com/photo-1505691723518-36a5ac3b2d95?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1505691723518-36a5ac3b2d95?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1501045661006-fcebe0257c3f?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80"
+    ],
+    "videos": [
+      "https://www.w3schools.com/html/mov_bbb.mp4"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Vondelstraat 16",
+    "city": "Amsterdam West",
+    "price": "₦1,150,000",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "sqft": 1650,
+    "type": "Sale",
+    "badge": "Garden",
+    "image": "https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1600&q=80"
+    ],
+    "videos": [
+      "https://www.w3schools.com/html/movie.mp4"
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Nieuwe Spiegelstraat 28",
+    "city": "london",
+    "price": "₦2,950 / month",
+    "bedrooms": 7,
+    "bathrooms": 2,
+    "sqft": 900,
+    "type": "Rent",
+    "badge": "Furnished",
+    "image": "https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=1600&q=80"
+    ],
+    "videos": [
+      "https://www.w3schools.com/html/movie.mp4"
+    ]
+  }
+]
