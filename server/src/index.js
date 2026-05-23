@@ -471,7 +471,7 @@ app.get('/api/admin/payments/:reference', requireAdmin, async (req, res) => {
 const path = require('path');
 const DIST = path.join(__dirname, '..', 'dist');
 app.use(express.static(DIST));
-app.get('*', (req, res) => {
+app.get('/{*path}', (req, res) => {
   res.sendFile(path.join(DIST, 'index.html'));
 });
 
