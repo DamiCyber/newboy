@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const { PrismaClient } = require('@prisma/client');
+const Groq = require('groq-sdk');
 const {
   validatePricePerNight,
   validateVideoTourUrl,
@@ -17,6 +18,7 @@ const {
 
 dotenv.config();
 const prisma = new PrismaClient();
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 const app = express();
 app.use(cors({
@@ -467,6 +469,56 @@ app.get('/api/admin/payments/:reference', requireAdmin, async (req, res) => {
     res.json(data.data);
   } catch (e) {
     res.status(500).json({ error: 'Failed to fetch receipt', detail: e?.message });
+  }
+});
+
+// ── Chat (AI assistant proxy) ─────────────────────────────────────────────────
+
+const CHAT_SYSTEM_PROMPT = `You are Nawft, the friendly AI assistant for NawftHomes — a real estate agency based in Ibadan, Nigeria (office at 16, Islamic Shopping Mall, Mall Block D (Upstairs), Bashorun, Ibadan).
+
+NawftHomes specialises in:
+- Property rentals (short stay and long term), priced per night or per month in Nigerian Naira (₦)
+- Property sales and purchases
+- Property lettings and management
+- Luxury listings
+
+Key details:
+- Phone: 091200391
+- Email: nawfthomes@gmail.com
+- Office visits and viewings are by appointment only — at least 24 hours notice required
+- Payments are in Nigerian Naira (₦)
+- The website has a Bookings page, a Checkout page, and an About page
+
+Your job is to help site visitors:
+- Find the right property type (rent vs buy, budget, bedrooms, location in Ibadan)
+- Understand the booking and checkout process
+- Get contact details and office info
+- Answer questions about listings, pricing, and availability
+- Guide them to the right page on the site
+
+Keep replies concise, warm, and helpful. If you don't know specific live listing details, tell them to call 091200391 or check the Bookings page. Never make up prices or availability. Always respond in English.`
+
+app.post('/api/chat', async (req, res) => {
+  try {
+    const { messages } = req.body || {};
+    if (!Array.isArray(messages) || messages.length === 0) {
+      return res.status(400).json({ error: 'messages array required' });
+    }
+
+    const response = await groq.chat.completions.create({
+      model: 'llama-3.3-70b-versatile',
+      max_tokens: 1000,
+      messages: [
+        { role: 'system', content: CHAT_SYSTEM_PROMPT },
+        ...messages,
+      ],
+    });
+
+    const text = response.choices?.[0]?.message?.content ?? '';
+    res.json({ text });
+  } catch (e) {
+    console.error('Chat proxy error:', e);
+    res.status(500).json({ error: 'Chat unavailable', detail: e?.message });
   }
 });
 
