@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const { PrismaClient } = require('@prisma/client');
-const Groq = require('groq-sdk');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 const {
   validatePricePerNight,
   validateVideoTourUrl,
@@ -18,7 +18,7 @@ const {
 
 dotenv.config();
 const prisma = new PrismaClient();
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 const app = express();
 app.use(cors({
@@ -505,16 +505,22 @@ app.post('/api/chat', async (req, res) => {
       return res.status(400).json({ error: 'messages array required' });
     }
 
-    const response = await groq.chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
-      max_tokens: 1000,
-      messages: [
-        { role: 'system', content: CHAT_SYSTEM_PROMPT },
-        ...messages,
-      ],
+    const model = genAI.getGenerativeModel({
+      model: 'gemini-1.5-flash',
+      systemInstruction: CHAT_SYSTEM_PROMPT,
     });
 
-    const text = response.choices?.[0]?.message?.content ?? '';
+    // All messages except the last become history
+    const history = messages.slice(0, -1).map((m) => ({
+      role: m.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: m.content }],
+    }));
+
+    const chat = model.startChat({ history });
+    const lastMessage = messages[messages.length - 1].content;
+    const result = await chat.sendMessage(lastMessage);
+    const text = result.response.text();
+
     res.json({ text });
   } catch (e) {
     console.error('Chat proxy error:', e);
