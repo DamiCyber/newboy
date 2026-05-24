@@ -20,6 +20,14 @@ dotenv.config();
 const prisma = new PrismaClient();
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
+// Ensure the data directory exists so propertiesStore.js never throws on first run
+const fs = require('fs');
+const path = require('path');
+const dataDir = path.join(__dirname, 'data');
+if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+const propertiesFile = path.join(dataDir, 'properties.json');
+if (!fs.existsSync(propertiesFile)) fs.writeFileSync(propertiesFile, '[]', 'utf-8');
+
 const app = express();
 app.use(cors({
   origin: "*",
@@ -139,6 +147,8 @@ app.post('/api/houses', requireAdmin, async (req, res) => {
         bedrooms: built.data.bedrooms ?? (Number(body.bedrooms) || 0),
         bathrooms: built.data.bathrooms ?? (Number(body.bathrooms) || 0),
         sqft: built.data.sqft ?? (Number(body.sqft) || 0),
+        // Default new listings to active so they appear on the homepage immediately
+        isActive: built.data.isActive !== undefined ? built.data.isActive : true,
       },
     });
     res.status(201).json(sanitize(house));
@@ -523,8 +533,8 @@ app.post('/api/chat', async (req, res) => {
 
     res.json({ text });
   } catch (e) {
-    console.error('Chat proxy error:', e);
-    res.status(500).json({ error: 'Chat unavailable', detail: e?.message });
+    console.error('Chat proxy error:', e?.message, e?.status, e?.errorDetails);
+    res.status(500).json({ error: 'Chat unavailable', detail: e?.message, status: e?.status });
   }
 });
 
