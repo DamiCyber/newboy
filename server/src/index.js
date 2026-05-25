@@ -481,8 +481,6 @@ app.get('/api/admin/payments/:reference', requireAdmin, async (req, res) => {
 });
 
 
-// ── Gemini Chatbot ────────────────────────────────────────────────────────────
-
 app.post('/api/chat', async (req, res) => {
   const { message, history = [] } = req.body || {};
   if (!message) return res.status(400).json({ error: 'message is required' });
@@ -498,7 +496,7 @@ app.post('/api/chat', async (req, res) => {
     ]);
     const all = [
       ...sanitize(houses).map(h =>
-        `[DB] ${h.title} | ${h.city} | ₦${Number(h.pricePerNight).toLocaleString('en-NG')}/night | ${h.bedrooms}bed ${h.bathrooms}bath | Type: ${h.listingType}`
+        `[DB] ${h.title} | ${h.city} | \u20a6${Number(h.pricePerNight).toLocaleString('en-NG')}/night | ${h.bedrooms}bed ${h.bathrooms}bath | Type: ${h.listingType}`
       ),
       ...properties.map(p =>
         `[Listing] ${p.title} | ${p.city} | ${p.price} | ${p.bedrooms}bed ${p.bathrooms}bath | Type: ${p.type}`
@@ -509,13 +507,12 @@ app.post('/api/chat', async (req, res) => {
       : '\n\nNo active listings at the moment.';
   } catch (_) {}
 
-  const systemInstruction = `You are Nawft, a friendly and knowledgeable AI assistant for NawftHomes — a Nigerian real estate company based in Ibadan.
+  const systemInstruction = `You are Nawft, a friendly and knowledgeable AI assistant for NawftHomes - a Nigerian real estate company based in Ibadan.
 Your job is to help visitors learn about available properties, understand how to book a viewing, and answer questions about renting or buying.
 Keep answers concise, warm, and helpful. Always respond in plain text (no markdown).
 Contact: 09027512008 (call or WhatsApp). Office: 16, Islamic Shopping Mall, Mall Block D (Upstairs), Bashorun, Ibadan.
 Payments are handled securely via Paystack. Viewings require 24-hour advance notice.${listingsContext}`;
 
-  // Gemini requires strictly alternating user/model turns starting with user
   const rawHistory = history
     .filter(m => m.role === 'user' || m.role === 'assistant')
     .map(m => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.text }] }));
@@ -533,7 +530,7 @@ Payments are handled securely via Paystack. Viewings require 24-hour advance not
 
   try {
     const geminiRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -556,7 +553,9 @@ Payments are handled securely via Paystack. Viewings require 24-hour advance not
   }
 });
 
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`API server listening on port ${PORT}`);
 });
+// ── Gemini Chatbot ────────────────────────────────────────────────────────────
