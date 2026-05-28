@@ -60,11 +60,17 @@ app.use(express.json());
 app.use('/uploads', express.static(uploadsDir));
 
 // ── Image upload ──────────────────────────────────────────────────────────────
-app.post('/api/admin/upload', requireAdmin, upload.single('image'), (req, res) => {
+// multer must run BEFORE requireAdmin on multipart routes so headers are readable
+app.post('/api/admin/upload', upload.single('image'), (req, res) => {
+  // Manual admin key check (works with multipart requests)
+  const adminKey = req.headers['x-admin-key'] || '';
+  const expectedKey = process.env.ADMIN_KEY || process.env.ADMIN_SECRET || '';
+  if (!adminKey || !expectedKey || adminKey !== expectedKey) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
   if (!req.file) {
     return res.status(400).json({ error: 'No image file received or file type not allowed.' });
   }
-  // Build a fully-qualified public URL the frontend can use
   const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'https';
   const host = req.headers['x-forwarded-host'] || req.get('host');
   const url = `${protocol}://${host}/uploads/${req.file.filename}`;
