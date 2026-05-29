@@ -19,6 +19,7 @@ model House {
   bedrooms      Int
   bathrooms     Int
   imageUrl      String?
+  subImageUrls  String[]
   videoTourUrl  String?
   isActive      Boolean    @default(true)
   createdAt     DateTime   @default(now())
